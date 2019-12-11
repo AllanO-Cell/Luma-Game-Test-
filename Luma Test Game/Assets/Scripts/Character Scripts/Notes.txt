@@ -1,0 +1,1 @@
+Scriptable object to be used for random health drops and other items such as stat boosters

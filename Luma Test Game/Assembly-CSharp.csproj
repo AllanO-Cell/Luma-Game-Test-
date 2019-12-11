@@ -117,6 +117,9 @@
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
     <Compile Include="Assets\Scripts\Character Scripts\Character_Movement.cs" />
     <Compile Include="Assets\Scripts\Character Scripts\GunController.cs" />
+    <Compile Include="Assets\Scripts\Character Scripts\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\Enemy Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Enemy Scripts\Enemy_Stats.cs" />
     <None Include="Assets\Scripts\Character Scripts\Notes.txt" />
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
     <Reference Include="Unity.Timeline.Editor">

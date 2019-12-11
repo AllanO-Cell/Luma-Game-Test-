@@ -9,7 +9,7 @@ public class Character_Movement : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
 
-    public bool running;
+    public bool isRunning;
 
     // caching the character controller on awake
     void Awake()
@@ -33,6 +33,8 @@ public class Character_Movement : MonoBehaviour
 
         //Based off the speed the game is running at and the set move speed
         characterController.SimpleMove(movement * Time.deltaTime);
+
+
     }
 
 }

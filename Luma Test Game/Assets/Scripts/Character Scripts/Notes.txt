@@ -1,1 +1,7 @@
 Scriptable object to be used for random health drops and other items such as stat boosters
+
+scriptable object to use how much health the enemy player has. This will be random for the levels and this will need to increase as new waves arrive
+
+need to have a scriptable object with a randomly selected amount of AI for the waves
+
+NB!!! move the damageAmount into the player stats system

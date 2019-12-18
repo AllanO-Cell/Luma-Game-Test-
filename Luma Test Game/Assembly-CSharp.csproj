@@ -115,12 +115,13 @@
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineMixer.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
-    <Compile Include="Assets\Scripts\Character Scripts\Character_Movement.cs" />
-    <Compile Include="Assets\Scripts\Character Scripts\GunController.cs" />
-    <Compile Include="Assets\Scripts\Character Scripts\PlayerStats.cs" />
-    <Compile Include="Assets\Scripts\Enemy Scripts\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Enemy Scripts\Enemy_Stats.cs" />
-    <None Include="Assets\Scripts\Character Scripts\Notes.txt" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyStatsSO.cs" />
+    <Compile Include="Assets\Scripts\Game Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Player\Character_Movement.cs" />
+    <Compile Include="Assets\Scripts\Player\GunControls.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\PlayerStatUpgrade.cs" />
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>F:/Unity Projects/Luma Test Game/Luma Test Game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

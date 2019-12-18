@@ -10,7 +10,6 @@ public class EnemyStatsSO : ScriptableObject
 
     public int
         enemyStartingHealth,
-        //enemyCurrentHealth,
         enemyAttackSpeed,
         enemyAttackDamage,
         enemyMoveSpeed;

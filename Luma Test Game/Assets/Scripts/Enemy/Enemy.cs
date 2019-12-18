@@ -3,21 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : EnemyStatsSO
+public class Enemy : MonoBehaviour
 {
 
-    PlayerStats playerStats;
-
+    Player player;
+    public EnemyStatsSO enemyStats;
     public int enemyCurrentHealth;
+    public int damage;
     
 
     //gather stats from the scriptable object
     private void OnEnable()
     {
-        enemyCurrentHealth = enemyStartingHealth;
-
-        //if (!playerStats) playerStats = FindObjectOfType<PlayerStats>();
-            
+        enemyCurrentHealth = enemyStats.enemyStartingHealth;
+        damage = enemyStats.enemyAttackDamage;
     }
 
 
@@ -27,7 +26,9 @@ public class Enemy : EnemyStatsSO
     {
         // do damage to the player
         // temp for damage dealing
-        throw new NotImplementedException();
+        var playerHealth = GetComponent<Player>();
+        if (playerHealth != null)
+            playerHealth.TakeDamage(damage);
     }
 
 
@@ -40,14 +41,25 @@ public class Enemy : EnemyStatsSO
     /// <param name="damageAmount"></param> Amount to damage the enemy(Based off the player stats) - the int value is determined in the "FireGun" function
     public void TakeDamage(int damageAmount)
     {
-        //damageAmount = playerStats.playerAttackDamage;
-        enemyCurrentHealth -= playerStats.playerAttackDamage;
+        
+        enemyCurrentHealth -= damageAmount;
         if (enemyCurrentHealth <= 0)
             Death();
     }
 
-    private void Death()
-    {
-        throw new NotImplementedException();
+
+    /// <summary>
+    ///Enemy death, This destorys the current instance of the game object and removes it from the list
+    /// </summary>
+    public void Death()
+    {  
+        var gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            gameManager.registeredEnemies.Remove(gameObject);
+            Destroy(gameObject);
+        }
+
+        gameManager.playerScore++;
     }
 }

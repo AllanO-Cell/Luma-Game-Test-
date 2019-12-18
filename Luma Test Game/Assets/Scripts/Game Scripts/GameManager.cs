@@ -1,17 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject lvlCanvas;
+    public EnemyStatsSO[] statUpdate;
+
     public bool lvlInProgress;
     public List<GameObject> enemies = new List<GameObject>();
     public float spawnTime; // will change every level
     public Transform[] spawnLocations;
-    List<GameObject> registeredEnemies = new List<GameObject>();
+    public List<GameObject> registeredEnemies = new List<GameObject>();
 
     int enemyAmount = 5; //initial amount of enemies will change as levels go higher
 
+    public int playerScore;
+
+
+    /// <summary>
+    /// repeat invokes the spawn function based on the time
+    /// </summary>
     private void Start()
     {
        InvokeRepeating("SpawnEnemies", spawnTime, spawnTime);
@@ -19,12 +29,18 @@ public class GameManager : MonoBehaviour
     }
 
 
+
     private void Update()
     {
         if(registeredEnemies.Count == enemyAmount)
         {
-            lvlInProgress = false;
             CancelInvoke();
+        }
+
+        if(registeredEnemies.Count == 0)
+        {
+            lvlInProgress = false;
+            RoundOver();
         }
     }
 
@@ -48,5 +64,34 @@ public class GameManager : MonoBehaviour
         registeredEnemies.Add(newGo);
 
     }
+
+    // prepares the next round of enimies with upgrades to their stats
+    void RoundOver()
+    {
+
+        lvlCanvas.SetActive(true);
+        while(lvlInProgress = false)
+        {
+            
+            foreach (EnemyStatsSO stat in statUpdate)
+            {
+                stat.enemyStartingHealth += 10;
+                stat.enemyAttackSpeed += 10;
+                stat.enemyAttackDamage += 10;
+                stat.enemyMoveSpeed += 10;
+
+            }
+            // adding a random amount of enemies after the first level based on the current amount 
+            int additionalEnemies = Random.Range(enemyAmount, enemyAmount += 3);
+            enemyAmount =+ additionalEnemies;
+            break;
+        }
+    }
+
+    void StartNextRound()
+    {
+        // start the next round pretty much need to repeatinvoke the
+    }
+
 }
 

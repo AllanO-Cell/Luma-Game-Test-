@@ -3,13 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunControls : PlayerStats
+public class GunControls : MonoBehaviour
 {
     Character_Movement movement;
+    PlayerStats m_playerStats;
 
     float timer;
     public Transform firePoint;
 
+
+    private void Awake()
+    {
+        movement = FindObjectOfType<Character_Movement>();
+        m_playerStats = FindObjectOfType<PlayerStats>();
+    }
 
     /// <summary>
     /// Checks if the player is running. if it is then the player will fire. if not the player will not fire
@@ -17,7 +24,7 @@ public class GunControls : PlayerStats
     private void Update()
     {
         timer += Time.deltaTime;
-        if(timer >= playerAttackSpeed)
+        if(timer >= m_playerStats.playerAttackSpeed)
         {
             if (movement.isRunning)
             {
@@ -44,7 +51,9 @@ public class GunControls : PlayerStats
         {
             var enemyHealth = hit.collider.GetComponent<Enemy>(); // gets the enemy script on the AI to reduce the health
             if (enemyHealth != null)
-                enemyHealth.TakeDamage(playerAttackDamage); // deals the damage based on the player stats
+                enemyHealth.TakeDamage(m_playerStats.playerAttackDamage); // deals the damage based on the player stats
         }
     }
+
+
 }

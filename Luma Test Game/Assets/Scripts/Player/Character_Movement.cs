@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character_Movement : PlayerStats
+
+public class Character_Movement : MonoBehaviour
 {
     CharacterController characterController; // unity character controller
+    PlayerStats playerStats;
 
 
     public bool isRunning;
@@ -15,6 +17,7 @@ public class Character_Movement : PlayerStats
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        playerStats = GetComponent<PlayerStats>();
     }
 
 
@@ -30,13 +33,13 @@ public class Character_Movement : PlayerStats
 
         var movement = new Vector3(horizontal, 0, vertical);
 
-        characterController.SimpleMove(movement * Time.deltaTime * playerMoveSpeed);
+        characterController.SimpleMove(movement * Time.deltaTime * playerStats.playerMoveSpeed);
 
 
-        transform.Rotate(Vector3.up, horizontal * playerTurnSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up, horizontal * playerStats.playerTurnSpeed * Time.deltaTime);
 
         if (vertical != 0)
-            characterController.SimpleMove(transform.forward * playerMoveSpeed * vertical);
+            characterController.SimpleMove(transform.forward * playerStats.playerMoveSpeed * vertical);
 
         // Check if the player is moving or not
         if (movement.magnitude > 0)

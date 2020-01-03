@@ -10,10 +10,11 @@ public class EnemyStatsSO : ScriptableObject
 
     public int
         enemyStartingHealth,
-        enemyAttackSpeed,
         enemyAttackDamage,
         enemyMoveSpeed;
 
+    public float enemyAttackSpeed;
+
     public bool isRanged;
-        
+    public int DeathXp;
 }

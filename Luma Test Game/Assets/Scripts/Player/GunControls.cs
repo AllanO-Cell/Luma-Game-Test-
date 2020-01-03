@@ -8,9 +8,11 @@ public class GunControls : MonoBehaviour
     Character_Movement movement;
     PlayerStats m_playerStats;
 
-    float timer;
-    public Transform firePoint;
+    public GameObject bulletPrefab;
+    public Transform bulletSpawn;
+    public float bulletSpeed = 30;
 
+    float shootRateTimeStamp;
 
     private void Awake()
     {
@@ -23,17 +25,12 @@ public class GunControls : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        timer += Time.deltaTime;
-        if(timer >= m_playerStats.playerAttackSpeed)
+        if (movement.isRunning)
         {
-            if (movement.isRunning)
-            {
-                timer = 0;
-                FireGun();
-            }
-            else
-                return;
+            FireGun();
         }
+        else
+            return;
     }
 
 
@@ -43,16 +40,22 @@ public class GunControls : MonoBehaviour
     /// </summary>
     private void FireGun()
     {
-        Debug.DrawRay(firePoint.position, firePoint.forward * 100, Color.red, 2f);
-        Ray ray = new Ray(firePoint.position, firePoint.forward);
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Time.time > shootRateTimeStamp)
         {
-            var enemyHealth = hit.collider.GetComponent<Enemy>(); // gets the enemy script on the AI to reduce the health
-            if (enemyHealth != null)
-                enemyHealth.TakeDamage(m_playerStats.playerAttackDamage); // deals the damage based on the player stats
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+            bullet.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * bulletSpeed);
+            shootRateTimeStamp = Time.time + m_playerStats.playerAttackSpeed;
         }
+
+        //if (Physics.Raycast(ray, out hit, 100))
+        //{
+        //    var enemyHealth = hit.collider.GetComponent<Enemy>(); // gets the enemy script on the AI to reduce the health
+        //    if (enemyHealth != null)
+        //        enemyHealth.TakeDamage(m_playerStats.playerAttackDamage); // deals the damage based on the player stats
+        //}
+
+
     }
 
 

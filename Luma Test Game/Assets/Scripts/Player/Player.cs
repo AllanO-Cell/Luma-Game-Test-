@@ -6,13 +6,13 @@ using UnityEngine;
 public class Player: MonoBehaviour
 {
     PlayerStats playerStats;
-
     public int currentHealth;
 
 
     // setting the players current health to the starting health of the player
     private void Awake()
     {
+        playerStats = FindObjectOfType<PlayerStats>();
         currentHealth = playerStats.playerStartingHealth;
     }
 
@@ -25,6 +25,8 @@ public class Player: MonoBehaviour
     public void TakeDamage(int dmgAmount)
     {
         currentHealth -= dmgAmount;
+        var healthUpdate = new HUDSystem();
+        healthUpdate.UpdateHud();
         if (currentHealth <= 0)
             Death();
     }

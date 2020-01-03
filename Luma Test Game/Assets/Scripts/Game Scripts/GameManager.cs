@@ -5,8 +5,10 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Stat Changes")]
     public GameObject lvlCanvas;
     public EnemyStatsSO[] statUpdate;
+    public Animator attackAnimation;
 
     public bool lvlInProgress;
     public List<GameObject> enemies = new List<GameObject>();
@@ -14,7 +16,7 @@ public class GameManager : MonoBehaviour
     public Transform[] spawnLocations;
     public List<GameObject> registeredEnemies = new List<GameObject>();
 
-    int enemyAmount = 5; //initial amount of enemies will change as levels go higher
+    int enemyAmount = 1; //initial amount of enemies will change as levels go higher
 
     public int playerScore;
 
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-       InvokeRepeating("SpawnEnemies", spawnTime, spawnTime);
+       InvokeRepeating("SpawnEnemies", 0, spawnTime);
        
     }
 
@@ -37,10 +39,11 @@ public class GameManager : MonoBehaviour
             CancelInvoke();
         }
 
-        if(registeredEnemies.Count == 0)
+        if (registeredEnemies.Count == 0 && lvlInProgress == true)
         {
             lvlInProgress = false;
             RoundOver();
+           
         }
     }
 
@@ -56,8 +59,6 @@ public class GameManager : MonoBehaviour
             CancelInvoke();
             return;
         }
-
-
         lvlInProgress = true;
         int spawnPointIndex = Random.Range(0, spawnLocations.Length);
         GameObject newGo = Instantiate(enemies[Random.RandomRange(0, enemies.Count)], spawnLocations[spawnPointIndex].position, spawnLocations[spawnPointIndex].rotation); 
@@ -65,7 +66,11 @@ public class GameManager : MonoBehaviour
 
     }
 
-    // prepares the next round of enimies with upgrades to their stats
+
+
+    /// <summary>
+    /// prepares the next round of enimies with upgrades to their stats
+    /// </summary>
     void RoundOver()
     {
 
@@ -76,21 +81,28 @@ public class GameManager : MonoBehaviour
             foreach (EnemyStatsSO stat in statUpdate)
             {
                 stat.enemyStartingHealth += 10;
-                stat.enemyAttackSpeed += 10;
+                stat.enemyAttackSpeed += 0.1f;
                 stat.enemyAttackDamage += 10;
                 stat.enemyMoveSpeed += 10;
-
+                stat.DeathXp += 10;
             }
+            attackAnimation.speed += 0.5f;
             // adding a random amount of enemies after the first level based on the current amount 
             int additionalEnemies = Random.Range(enemyAmount, enemyAmount += 3);
             enemyAmount =+ additionalEnemies;
             break;
         }
+
     }
 
-    void StartNextRound()
+
+    /// <summary>
+    /// called when the UI button to continue is pressed
+    /// </summary>
+    public void StartNextRound()
     {
-        // start the next round pretty much need to repeatinvoke the
+        lvlCanvas.SetActive(false);
+        InvokeRepeating("SpawnEnemies", spawnTime, spawnTime);
     }
 
 }

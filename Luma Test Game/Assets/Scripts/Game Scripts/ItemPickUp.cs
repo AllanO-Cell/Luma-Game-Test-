@@ -16,9 +16,10 @@ public class ItemPickUp : MonoBehaviour
          msItem;
 
     int percent;
+    public GameObject m_particles;
 
 
-
+    HUDSystem healthUpdate;
     Player playerHealth;
     PlayerStats currentStats;
 
@@ -26,6 +27,7 @@ public class ItemPickUp : MonoBehaviour
     {
         playerHealth = FindObjectOfType<Player>();
         currentStats = FindObjectOfType<PlayerStats>();
+        healthUpdate = FindObjectOfType<HUDSystem>();
     }
 
 
@@ -43,6 +45,9 @@ public class ItemPickUp : MonoBehaviour
             {
                 percent = (int)UnityEngine.Random.Range(20f, 50f);
                 AddHealth(playerHealth.currentHealth);
+                healthUpdate.UpdateHud();
+                
+
             }
 
         if (dmgItem)
@@ -50,6 +55,7 @@ public class ItemPickUp : MonoBehaviour
             StartCoroutine(currentStats.DamageBoost());
             Destroy(gameObject.GetComponent<Collider>());
             Destroy(gameObject.GetComponent<MeshRenderer>());
+            Destroy(m_particles);
             Destroy(gameObject, 11f);
         }
 
@@ -59,6 +65,7 @@ public class ItemPickUp : MonoBehaviour
             StartCoroutine(currentStats.AttackSpeedBoost());
             Destroy(gameObject.GetComponent<Collider>());
             Destroy(gameObject.GetComponent<MeshRenderer>());
+            Destroy(m_particles);
             Destroy(gameObject, 11f);
         }
 
@@ -67,6 +74,7 @@ public class ItemPickUp : MonoBehaviour
             StartCoroutine(currentStats.MoveSpeedBoost());
             Destroy(gameObject.GetComponent<Collider>());
             Destroy(gameObject.GetComponent<MeshRenderer>());
+            Destroy(m_particles);
             Destroy(gameObject, 11f);
         }
 
@@ -78,8 +86,9 @@ public class ItemPickUp : MonoBehaviour
     /// <param name="health"></param> pass in the players current health
     void AddHealth(int health)
     {
-        float test = ((float)percent / 100) * health;
-        playerHealth.currentHealth = playerHealth.currentHealth + (int)Math.Ceiling(test);
+        float total = ((float)percent / 100) * health;
+        playerHealth.currentHealth = playerHealth.currentHealth + (int)Math.Ceiling(total);
+        Destroy(gameObject, 2f);
     }
 
 

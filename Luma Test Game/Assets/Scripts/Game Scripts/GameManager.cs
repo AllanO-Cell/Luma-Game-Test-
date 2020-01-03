@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public Transform[] spawnLocations;
     public List<GameObject> registeredEnemies = new List<GameObject>();
 
-    int enemyAmount = 1; //initial amount of enemies will change as levels go higher
+    int enemyAmount = 3; //initial amount of enemies will change as levels go higher
 
     public int playerScore;
 

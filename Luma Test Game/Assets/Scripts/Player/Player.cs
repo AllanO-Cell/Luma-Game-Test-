@@ -7,13 +7,14 @@ public class Player: MonoBehaviour
 {
     PlayerStats playerStats;
     public int currentHealth;
-
+    HUDSystem m_hudSystem;
 
     // setting the players current health to the starting health of the player
     private void Awake()
     {
         playerStats = FindObjectOfType<PlayerStats>();
         currentHealth = playerStats.playerStartingHealth;
+        m_hudSystem = FindObjectOfType<HUDSystem>();
     }
 
 
@@ -25,7 +26,7 @@ public class Player: MonoBehaviour
     public void TakeDamage(int dmgAmount)
     {
         currentHealth -= dmgAmount;
-        var healthUpdate = new HUDSystem();
+        var healthUpdate = m_hudSystem;
         healthUpdate.UpdateHud();
         if (currentHealth <= 0)
             Death();

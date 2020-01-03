@@ -34,11 +34,14 @@ public class PlayerStats : MonoBehaviour
     /// <param name="xpAmount"></param> Amount of XP to gain parameter, This is based and set from the enemy death script
     public void AddExperience(int xpAmount)
     {
+
         experience += xpAmount;
-        if(experience >= experienceToNextLevel)
+        HUDSystem hud = FindObjectOfType<HUDSystem>();
+        hud.UpdateHud();
+        if (experience >= experienceToNextLevel)
         {
             level++;
-            upgradePoints ++;
+            upgradePoints++;
             experience = experienceToNextLevel;
             IncreaseXPNeeded(0, 100 * level * Mathf.Pow(level, 0.5f));
         }
@@ -53,8 +56,8 @@ public class PlayerStats : MonoBehaviour
     void IncreaseXPNeeded(float currentValue, float maxValue)
     {
         experienceToNextLevel = (int)currentValue;
-        HUDSystem hud = new HUDSystem();
-        hud.UpdateHud();
+
+
     }
 
 
@@ -68,7 +71,7 @@ public class PlayerStats : MonoBehaviour
     /// each value is calculated to be "balanced"
     /// </summary>
     /// <returns></returns>
-   public IEnumerator DamageBoost()
+    public IEnumerator DamageBoost()
     {
         int cacheBaseDamage = playerAttackDamage;
         playerAttackDamage = playerAttackDamage * 2;

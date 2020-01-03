@@ -13,6 +13,9 @@ public class StatUpgrades : MonoBehaviour
     PlayerStats m_stats;
     Player playerHealth;
 
+    public Text health, damage, attackSpeed, moveSpeed;
+
+
     //cache the player stats once for the whole game
     private void Awake()
     {
@@ -28,6 +31,19 @@ public class StatUpgrades : MonoBehaviour
         if (m_stats.upgradePoints != 0)
             canUpgrade = true;
     }
+
+
+    /// <summary>
+    /// Updates the UI text with the values from the player stats
+    /// </summary>
+    private void Update()
+    {
+        health.text = playerHealth.currentHealth.ToString();
+        damage.text = m_stats.playerAttackDamage.ToString();
+        attackSpeed.text = m_stats.playerAttackSpeed.ToString();
+        moveSpeed.text = m_stats.playerMoveSpeed.ToString();
+    }
+
 
 
 

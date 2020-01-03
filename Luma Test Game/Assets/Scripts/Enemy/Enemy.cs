@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     [Header("Dropable items")]
     public GameObject[] itemDrop;
     float dropRate = 0.25f;
+    public Transform dropSpawnLocation;
 
     [Header("Attacking Parameters")]
     public GameObject EnemyBullets;
@@ -33,7 +34,7 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         enemyCurrentHealth = enemyStats.enemyStartingHealth;
-        enemyStats.isRanged = isRanged;
+        isRanged = enemyStats.isRanged;
 
         agent = gameObject.GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -49,25 +50,21 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        bool isMoving;
         if (target != null)
         {
             agent.SetDestination(target.position);
-            isMoving = true;
         }
         else return;
 
-        if(isRanged)
+        if(isRanged == true)
         {
-            while (isMoving)
-            {
                 if(Time.time > shootRateTimeStamp)
                 {
                     GameObject bullet = Instantiate(EnemyBullets, bulletSpawn.position, bulletSpawn.rotation);
                     bullet.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * bulletSpeed);
                     shootRateTimeStamp = Time.time + enemyStats.enemyAttackSpeed;
                 }
-            }
+
         }
     }
     
@@ -124,7 +121,7 @@ public class Enemy : MonoBehaviour
         if (Random.Range(0f, 1f) <= dropRate)
         {
             int indexToDrop = Random.Range(0, itemDrop.Length);
-            Instantiate(itemDrop[indexToDrop], transform.position, transform.rotation);
+            Instantiate(itemDrop[indexToDrop], dropSpawnLocation.transform.position, dropSpawnLocation.transform.rotation);
         }
     }
 }

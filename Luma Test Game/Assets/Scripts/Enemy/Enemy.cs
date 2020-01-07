@@ -26,7 +26,8 @@ public class Enemy : MonoBehaviour
     public float bulletSpeed;
     float shootRateTimeStamp;
 
-    
+
+
     /// <summary>
     /// gather stats from the scriptable object
     /// Using the Unity Navmesh component, from when the enemy spawns the enemy will run towards the player
@@ -40,34 +41,49 @@ public class Enemy : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
         agent.speed = enemyStats.enemyMoveSpeed;
 
-       
+
+
+
     }
 
 
     /// <summary>
     /// Sets the navmesh agent to follow after the player
     /// Checks if the enemy is range. If the enemy is ranged is moving the enemy will start shooting
+    /// Checks if the AI has reached its target stopping disstance, if it has the enemy needs to look and continue firing at the player
     /// </summary>
     private void Update()
     {
+        //Checks the distance. if its reached tells the enemy to face towards the players position
+        if (target != null)
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                Vector3 lookVector = target.transform.position - transform.position;
+                lookVector.y = transform.position.y;
+                Quaternion rot = Quaternion.LookRotation(lookVector);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, 0.1f);
+            }
+        }
+
         if (target != null)
         {
             agent.SetDestination(target.position);
         }
         else return;
 
-        if(isRanged == true)
+        if (isRanged == true)
         {
-                if(Time.time > shootRateTimeStamp)
-                {
-                    GameObject bullet = Instantiate(EnemyBullets, bulletSpawn.position, bulletSpawn.rotation);
-                    bullet.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * bulletSpeed);
-                    shootRateTimeStamp = Time.time + enemyStats.enemyAttackSpeed;
-                }
+            if (Time.time > shootRateTimeStamp)
+            {
+                GameObject bullet = Instantiate(EnemyBullets, bulletSpawn.position, bulletSpawn.rotation);
+                bullet.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * bulletSpeed);
+                shootRateTimeStamp = Time.time + enemyStats.enemyAttackSpeed;
+            }
 
         }
     }
-    
+
 
 
 
@@ -88,7 +104,7 @@ public class Enemy : MonoBehaviour
 
     private float Map(float value, float inMin, float inMax, float outMin, float outMax)
     {
-        
+
         return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     }
 
@@ -97,6 +113,7 @@ public class Enemy : MonoBehaviour
     /// <summary>
     ///Enemy death, This destorys the current instance of the game object and removes it from the list
     ///the death also adds to the player score and adds to the experience system using the amount of xp the enemies give from the scritable object
+    /// Add 1 point to the players score upon death 
     /// </summary>
     public void Death()
     {
@@ -114,7 +131,7 @@ public class Enemy : MonoBehaviour
 
 
     /// <summary>
-    ///  Needs testing
+    /// Selects a random value (drop percent) and randomly selects a dropable item based on it array index from our array and drops it
     /// </summary>
     void DropItem()
     {

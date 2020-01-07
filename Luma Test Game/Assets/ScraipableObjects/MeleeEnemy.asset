@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStartingHealth: 100
   enemyAttackDamage: 10
-  enemyMoveSpeed: 6
-  enemyAttackSpeed: 2
+  enemyMoveSpeed: 5
+  enemyAttackSpeed: 1
   isRanged: 0
-  DeathXp: 20
+  DeathXp: 10
+  defaultHealth: 100
+  defaultDamage: 10
+  deafaulMoveSpeed: 5
+  defaultXp: 10
+  defaultAttackSpeed: 1

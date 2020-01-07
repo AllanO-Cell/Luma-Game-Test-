@@ -30,13 +30,13 @@ public class Character_Movement : MonoBehaviour
     {
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
-
+        var mouseHorizontal = Input.GetAxis("Mouse X");
         var movement = new Vector3(horizontal, 0, vertical);
 
         characterController.SimpleMove(movement * Time.deltaTime * playerStats.playerMoveSpeed);
 
-
         transform.Rotate(Vector3.up, horizontal * playerStats.playerTurnSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up, mouseHorizontal * playerStats.playerTurnSpeed * Time.deltaTime);
 
         if (vertical != 0)
             characterController.SimpleMove(transform.forward * playerStats.playerMoveSpeed * vertical);

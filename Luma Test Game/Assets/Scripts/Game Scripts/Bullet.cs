@@ -12,6 +12,10 @@ public class Bullet : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Comparing the tag. If it matches we check if the health is null if not then we tell the enemy to take damage based on the player damage stats
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))

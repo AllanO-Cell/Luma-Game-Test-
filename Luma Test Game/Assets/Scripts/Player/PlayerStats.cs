@@ -11,7 +11,6 @@ public class PlayerStats : MonoBehaviour
 {
     public int
         playerStartingHealth,
-        currentPlayerHealth, // move current player health to player script
         playerAttackDamage,
         playerMoveSpeed,
         playerTurnSpeed;
@@ -82,7 +81,7 @@ public class PlayerStats : MonoBehaviour
     public IEnumerator AttackSpeedBoost()
     {
         float cacheBaseAttkSpeed = playerAttackSpeed;
-        playerAttackSpeed = playerAttackSpeed += 3;
+        playerAttackSpeed = playerAttackSpeed -= 0.2f;
         yield return new WaitForSecondsRealtime(10f);
         playerAttackSpeed = cacheBaseAttkSpeed;
     }

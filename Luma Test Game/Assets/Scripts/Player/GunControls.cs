@@ -36,7 +36,8 @@ public class GunControls : MonoBehaviour
 
 
     /// <summary>
-    /// Gathering information on whats been hit using raycasts and dealing damage according to the players stats
+    /// We instantiate bullets here based on our players attack speed.
+    /// Instantiate was used rather than object pooling due to time and amount of code to be written
     /// </summary>
     private void FireGun()
     {
@@ -47,15 +48,6 @@ public class GunControls : MonoBehaviour
             bullet.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * bulletSpeed);
             shootRateTimeStamp = Time.time + m_playerStats.playerAttackSpeed;
         }
-
-        //if (Physics.Raycast(ray, out hit, 100))
-        //{
-        //    var enemyHealth = hit.collider.GetComponent<Enemy>(); // gets the enemy script on the AI to reduce the health
-        //    if (enemyHealth != null)
-        //        enemyHealth.TakeDamage(m_playerStats.playerAttackDamage); // deals the damage based on the player stats
-        //}
-
-
     }
 
 

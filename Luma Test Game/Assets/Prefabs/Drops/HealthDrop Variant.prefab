@@ -25,8 +25,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18903cc4931d102439f95e368df2555e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthItem: 0
-  dmgItem: 1
+  healthItem: 1
+  dmgItem: 0
   attkSpeedItem: 0
   msItem: 0
   m_particles: {fileID: 689705445406782745}
@@ -137,6 +137,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthDrop Variant
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 279d731c1192edc4197559d1d53d4f31,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1b1846ee15085ce44abaf9b65bc2b007, type: 2}
     - target: {fileID: -4216859302048453862, guid: 279d731c1192edc4197559d1d53d4f31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -207,11 +212,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 38.35229
       objectReference: {fileID: 0}
-    - target: {fileID: -1504981713932161579, guid: 279d731c1192edc4197559d1d53d4f31,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1b1846ee15085ce44abaf9b65bc2b007, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 279d731c1192edc4197559d1d53d4f31, type: 3}
 --- !u!1 &5165447832388991292 stripped

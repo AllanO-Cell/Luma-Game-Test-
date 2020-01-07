@@ -10,10 +10,12 @@ using UnityEngine.UI;
 public class StatUpgrades : MonoBehaviour
 {
     bool canUpgrade;
-    PlayerStats m_stats;
-    Player playerHealth;
+    public PlayerStats m_stats;
+    public Player playerHealth;
 
     public Text health, damage, attackSpeed, moveSpeed;
+    public Button[] uiButtons;
+    public Text headerText;
 
 
     //cache the player stats once for the whole game
@@ -22,15 +24,31 @@ public class StatUpgrades : MonoBehaviour
         m_stats = FindObjectOfType<PlayerStats>();
         playerHealth = FindObjectOfType<Player>();
     }
+
+
     /// <summary>
-    ///  Will be called everytime the canvas gameobject is set active since we will only be turning it on and off at the 
-    ///  start and end of the round
+    ///  Will be called everytime the canvas gameobject is set active since we will only be turning it on and off at the start and end of the round
+    ///  Checks if the player has any upgrade points if not disables the interactive option on the button
+    ///  
     /// </summary>
     private void OnEnable()
     {
         if (m_stats.upgradePoints != 0)
             canUpgrade = true;
+
+        if(canUpgrade == false)
+        {
+            foreach (Button b in uiButtons)
+            {
+                b.interactable = false;
+            }
+
+            
+        }
+
+
     }
+
 
 
     /// <summary>
@@ -42,6 +60,17 @@ public class StatUpgrades : MonoBehaviour
         damage.text = m_stats.playerAttackDamage.ToString();
         attackSpeed.text = m_stats.playerAttackSpeed.ToString();
         moveSpeed.text = m_stats.playerMoveSpeed.ToString();
+        if (m_stats.upgradePoints == 0)
+        {
+            canUpgrade = false;
+            headerText.text = "You have no upgrade points to spend";
+            headerText.color = Color.red;
+        }
+        else
+        {
+            headerText.text = "You have " + m_stats.upgradePoints.ToString() + " points to spend";
+            headerText.color = Color.green;
+        }
     }
 
 
@@ -56,25 +85,25 @@ public class StatUpgrades : MonoBehaviour
     /// <param name="amount"></param>
     public void UpgradeHealth(int amount)
     {
-        if (canUpgrade = true)
+        if (canUpgrade == true)
             playerHealth.currentHealth = playerHealth.currentHealth + amount;
     }
 
     public void UpgradeAttkDmg(int amount)
     {
-        if (canUpgrade = true)
+        if (canUpgrade == true)
             m_stats.playerAttackDamage = m_stats.playerAttackDamage + amount;
     }
 
     public void UpgradeAttackSpeed(float amount)
     {
-        if (canUpgrade = true)
-            m_stats.playerAttackSpeed = m_stats.playerAttackSpeed + amount;
+        if (canUpgrade == true)
+            m_stats.playerAttackSpeed = m_stats.playerAttackSpeed - amount;
     }
 
     public void upgradeMoveSpeed(int amount)
     {
-        if (canUpgrade = true)
+        if (canUpgrade == true)
             m_stats.playerMoveSpeed = m_stats.playerMoveSpeed + amount;
     }
 

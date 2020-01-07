@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!54 &1771144518641995797
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 733821803882361235}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
 --- !u!65 &1565370084
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45,7 +29,7 @@ MonoBehaviour:
   dmgItem: 0
   attkSpeedItem: 1
   msItem: 0
-  m_particles: {fileID: 0}
+  m_particles: {fileID: 492152006918049267}
 --- !u!1001 &491552678033550483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,6 +99,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e55149ba6f4d00741984987e258c3378, type: 3}
+--- !u!1 &492152006918049267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1725317912486240, guid: e55149ba6f4d00741984987e258c3378,
+    type: 3}
+  m_PrefabInstance: {fileID: 491552678033550483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8723158140345346202
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -127,6 +117,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackSpeedDrop Variant
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 279d731c1192edc4197559d1d53d4f31,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 663a3ec329de566458522e6f2500a2ad, type: 2}
     - target: {fileID: -4216859302048453862, guid: 279d731c1192edc4197559d1d53d4f31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -197,11 +192,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 38.35229
       objectReference: {fileID: 0}
-    - target: {fileID: -1504981713932161579, guid: 279d731c1192edc4197559d1d53d4f31,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 663a3ec329de566458522e6f2500a2ad, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 279d731c1192edc4197559d1d53d4f31, type: 3}
 --- !u!1 &733821803882361235 stripped

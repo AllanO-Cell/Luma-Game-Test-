@@ -125,6 +125,9 @@
     <Compile Include="Assets\Scripts\Player\GunControls.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\ScoreScripts\GatherNameAndScores.cs" />
+    <Compile Include="Assets\Scripts\ScoreScripts\Scoreboard.cs" />
+    <Compile Include="Assets\Scripts\ScoreScripts\ScoreBoardEntryUI.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\HUDSystem.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\StatUpgrades.cs" />
     <None Include="Assets\ErbGameArt\Procedural fire\Shaders\FireSphere.shader" />
